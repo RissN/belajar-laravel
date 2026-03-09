@@ -67,6 +67,10 @@
                                         <p class="text-center small">Enter your username & password to login</p>
                                     </div>
 
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">{{ $errors->first() }}</div>
+                                    @endif
+
                                     <form class="row g-3 needs-validation" method="post" action="{{ route('action-login') }}" novalidate>
                                         @csrf
                                         <div class="col-12">
