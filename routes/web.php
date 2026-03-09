@@ -62,6 +62,7 @@ Route::post('store', [BelajarController::class, 'store'])->name('siswa.store');
 
 Route::get('/', [LoginController::class, 'index']);
 Route::post('action-login', [LoginController::class, 'actionLogin'])->name('action-login');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('dashboard', [DashboardController::class, 'index']);
 

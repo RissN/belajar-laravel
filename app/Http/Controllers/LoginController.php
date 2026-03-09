@@ -27,4 +27,11 @@ class LoginController extends Controller
             'email' => 'Please check your email or password!',
         ]);
     }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->to('/');
+    }
 }
