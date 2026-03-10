@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Role;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -15,7 +14,7 @@ class RoleController extends Controller
     public function index()
     {
         $title = "Data Role";
-        $role = Role::get();
+        $roles = Role::get();
         return view('role.index', compact('title', 'roles'));
     }
 
@@ -57,7 +56,7 @@ class RoleController extends Controller
     public function edit(string $id)
     {
         $title = "Edit Role";
-        $role = Role::find($id);
+        $roles = Role::find($id);
         return view('role.edit', compact('title', 'role'));
     }
 
@@ -67,9 +66,9 @@ class RoleController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([]);
-        $role = Role::find($id);
-        $role->name = $request->name;
-        $role->save();
+        $roles = Role::find($id);
+        $roles->name = $request->name;
+        $roles->save();
         Alert::success('Success', 'Role updated successfully');
         return redirect()->route('role.index');
     }
