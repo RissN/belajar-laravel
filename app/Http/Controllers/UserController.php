@@ -59,7 +59,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $title = "Edit User";
+        $user = User::find($id);
+        return view('user.edit', compact('title', 'user'));
     }
 
     /**
@@ -67,7 +69,20 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email', $id,
+            'password' => 'required|min:8'
+        ]);
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = $request->password;
+        }
+        $user->save();
+        Alert::success('Success', 'User updated successfully');
+        return redirect()->route('user.index');
     }
 
     /**
