@@ -23,7 +23,7 @@
                                     <td>{{ $role->name }}</td>
                                     <td>
                                         <a href="{{ route('role.edit', $role->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                        <form id="delete-form-{{ $role->id }}" method="post" class="d-inline" action="{{ route('role.destroy', $user->id) }}">
+                                        <form id="delete-form-{{ $role->id }}" method="post" class="d-inline" action="{{ route('role.destroy', $role->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm delete-btn">Delete</button>

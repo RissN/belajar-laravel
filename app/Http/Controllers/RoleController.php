@@ -15,8 +15,8 @@ class RoleController extends Controller
     public function index()
     {
         $title = "Data Role";
-        $users = User::get();
-        return view('Role.index', compact('title', 'roles'));
+        $role = Role::get();
+        return view('role.index', compact('title', 'roles'));
     }
 
     /**
@@ -25,7 +25,7 @@ class RoleController extends Controller
     public function create()
     {
         $title = "Create New Role";
-        return view('Role.create', compact('title'));
+        return view('role.create', compact('title'));
     }
 
     /**
@@ -35,13 +35,9 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8'
         ]);
         Role::create([
             'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
         ]);
         Alert::success('Success', 'Role created successfully');
         return redirect()->route('role.index');
@@ -60,7 +56,7 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        $title = "Edit User";
+        $title = "Edit Role";
         $role = Role::find($id);
         return view('role.edit', compact('title', 'role'));
     }
@@ -70,17 +66,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email', $id,
-            'password' => 'required|min:8'
-        ]);
+        $request->validate([]);
         $role = Role::find($id);
         $role->name = $request->name;
-        $role->email = $request->email;
-        if ($request->password) {
-            $role->password = $request->password;
-        }
         $role->save();
         Alert::success('Success', 'Role updated successfully');
         return redirect()->route('role.index');
