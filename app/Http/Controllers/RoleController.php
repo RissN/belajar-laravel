@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $title = "Data User";
+        $title = "Data Role";
         $users = User::get();
-        return view('user.index', compact('title', 'users'));
+        return view('Role.index', compact('title', 'roles'));
     }
 
     /**
@@ -23,8 +24,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $title = "Create New User";
-        return view('user.create', compact('title'));
+        $title = "Create New Role";
+        return view('Role.create', compact('title'));
     }
 
     /**
@@ -37,13 +38,13 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8'
         ]);
-        User::create([
+        Role::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
         ]);
-        Alert::success('Success', 'User created successfully');
-        return redirect()->route('user.index');
+        Alert::success('Success', 'Role created successfully');
+        return redirect()->route('role.index');
     }
 
     /**
@@ -60,8 +61,8 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $title = "Edit User";
-        $user = User::find($id);
-        return view('user.edit', compact('title', 'user'));
+        $role = Role::find($id);
+        return view('role.edit', compact('title', 'role'));
     }
 
     /**
@@ -71,19 +72,18 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            $id,
+            'email' => 'required|email|unique:users,email', $id,
             'password' => 'required|min:8'
         ]);
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $role = Role::find($id);
+        $role->name = $request->name;
+        $role->email = $request->email;
         if ($request->password) {
-            $user->password = $request->password;
+            $role->password = $request->password;
         }
-        $user->save();
-        Alert::success('Success', 'User updated successfully');
-        return redirect()->route('user.index');
+        $role->save();
+        Alert::success('Success', 'Role updated successfully');
+        return redirect()->route('role.index');
     }
 
     /**
@@ -91,9 +91,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::find($id);
-        $user->delete();
-        Alert::success('Success', 'User deleted successfully');
-        return redirect()->route('user.index');
+        $role = Role::find($id);
+        $role->delete();
+        Alert::success('Success', 'Role deleted successfully');
+        return redirect()->route('role.index');
     }
 }
