@@ -13,8 +13,8 @@ class UserController extends Controller
     public function index()
     {
         $title = "Data User";
-        $users = Users::get();
-        return view('user.index', compact('title', 'user'));
+        $users = User::get();
+        return view('user.index', compact('title', 'users'));
     }
 
     /**
@@ -22,7 +22,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Create New User";
+        return view('user.create', compact('title'));
     }
 
     /**
