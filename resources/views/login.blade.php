@@ -71,7 +71,8 @@
                                         <div class="alert alert-danger">{{ $errors->first() }}</div>
                                     @endif
 
-                                    <form class="row g-3 needs-validation" method="post" action="{{ route('action-login') }}" novalidate>
+                                    <form class="row g-3 needs-validation" method="post"
+                                        action="{{ route('action-login') }}" novalidate>
                                         @csrf
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Email</label>
@@ -137,6 +138,7 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
 
 </body>
 
