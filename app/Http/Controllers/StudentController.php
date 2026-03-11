@@ -72,7 +72,7 @@ class StudentController extends Controller
     {
         $title = "Edit Student";
         $students = Student::findOrFail($id);
-        return view('student.edit', compact('title', 'student'));
+        return view('student.edit', compact('title', 'students'));
     }
 
     /**

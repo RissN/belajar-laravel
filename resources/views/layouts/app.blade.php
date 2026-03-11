@@ -30,6 +30,11 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <style>
+        #gender {
+            padding-right: 30px;
+        }
+    </style>
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -88,6 +93,30 @@
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        const imgInput = document.getElementById("image-input");
+        const imgPreview = document.getElementById("image-preview");
+        imgInput.addEventListener("change", function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.addEventListener("load", function() {
+                    imgPreview.setAttribute("src", this.result);
+                });
+                reader.readAsDataURL(file);
+            }
+        });
+
+        const gender = document.getElementById("gender");
+        const arrow = document.getElementById("arrowIcon");
+        gender.addEventListener("focus", function() {
+            arrow.classList.remove("bi-chevron-down");
+            arrow.classList.add("bi-chevron-up");
+        });
+        gender.addEventListener("blur", function() {
+            arrow.classList.remove("bi-chevron-up");
+            arrow.classList.add("bi-chevron-down");
+        });
+
         $(document).ready(function() {
             $(document).on('click', '.delete-btn', function(e) {
                 e.preventDefault();

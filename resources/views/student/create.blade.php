@@ -50,6 +50,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Image *</label>
                                 <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                                <img id="img-preview" src="{{ asset('assets/img/detective.png') }}" alt="" width="80">
                             </div>
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-primary">Save</button>
