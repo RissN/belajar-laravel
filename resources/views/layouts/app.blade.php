@@ -95,27 +95,31 @@
     <script>
         const imgInput = document.getElementById("image");
         const imgPreview = document.getElementById("img-preview");
-        imgInput.addEventListener("change", function() {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.addEventListener("load", function() {
-                    imgPreview.setAttribute("src", this.result);
-                });
-                reader.readAsDataURL(file);
-            }
-        });
+        if (imgInput && imgPreview) {
+            imgInput.addEventListener("change", function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.addEventListener("load", function() {
+                        imgPreview.setAttribute("src", this.result);
+                    });
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
 
         const gender = document.getElementById("gender");
         const arrow = document.getElementById("arrowIcon");
-        gender.addEventListener("focus", function() {
-            arrow.classList.remove("bi-chevron-down");
-            arrow.classList.add("bi-chevron-up");
-        });
-        gender.addEventListener("blur", function() {
-            arrow.classList.remove("bi-chevron-up");
-            arrow.classList.add("bi-chevron-down");
-        });
+        if (gender && arrow) {
+            gender.addEventListener("focus", function() {
+                arrow.classList.remove("bi-chevron-down");
+                arrow.classList.add("bi-chevron-up");
+            });
+            gender.addEventListener("blur", function() {
+                arrow.classList.remove("bi-chevron-up");
+                arrow.classList.add("bi-chevron-down");
+            });
+        }
 
         $(document).ready(function() {
             $(document).on('click', '.delete-btn', function(e) {

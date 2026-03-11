@@ -82,6 +82,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role_id = $request->role_id;
         if ($request->password) {
             $user->password = $request->password;
         }
