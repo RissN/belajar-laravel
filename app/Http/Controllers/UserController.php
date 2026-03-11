@@ -74,18 +74,32 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            $id,
-            'password' => 'required|min:8'
+            'name' => 'nullable|string',
+            'email' => 'nullable|email|unique:users,email,' . $id,
+            'password' => 'nullable|min:8'
         ]);
         $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->role_id = $request->role_id;
-        if ($request->password) {
+
+        // Update name only if provided
+        if ($request->filled('name')) {
+            $user->name = $request->name;
+        }
+
+        // Update email only if provided
+        if ($request->filled('email')) {
+            $user->email = $request->email;
+        }
+
+        // Update role only if provided
+        if ($request->filled('role_id')) {
+            $user->role_id = $request->role_id;
+        }
+
+        // Update password only if provided
+        if ($request->filled('password')) {
             $user->password = $request->password;
         }
+
         $user->save();
         Alert::success('Success', 'User updated successfully');
         return redirect()->route('user.index');
