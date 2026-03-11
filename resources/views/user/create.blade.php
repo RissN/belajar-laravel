@@ -11,6 +11,15 @@
                     <form action="{{ route('user.store') }}" method="post">
                         @csrf
                         <div class="mb-3">
+                            <label for="role" class="form-label">Role</label>
+                            <select name="role_id" id="" class="form-control">
+                                <option value="">Choose Role</option>
+                                @foreach ( $roles as $role )
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" placeholder="Enter your name" class="form-control" id="name" name="name" required>
                         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
@@ -14,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $title = "Data User";
-        $users = User::get();
+        $users = User::with('role')->get();
         return view('user.index', compact('title', 'users'));
     }
 
@@ -24,7 +25,8 @@ class UserController extends Controller
     public function create()
     {
         $title = "Create New User";
-        return view('user.create', compact('title'));
+        $roles = Role::all();
+        return view('user.create', compact('title', 'roles'));
     }
 
     /**
@@ -41,6 +43,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
+            'role_id' => $request->role_id,
         ]);
         Alert::success('Success', 'User created successfully');
         return redirect()->route('user.index');
@@ -61,7 +64,8 @@ class UserController extends Controller
     {
         $title = "Edit User";
         $user = User::find($id);
-        return view('user.edit', compact('title', 'user'));
+        $roles = Role::all();
+        return view('user.edit', compact('title', 'user', 'roles'));
     }
 
     /**
