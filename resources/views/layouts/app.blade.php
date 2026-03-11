@@ -93,8 +93,8 @@
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const imgInput = document.getElementById("image-input");
-        const imgPreview = document.getElementById("image-preview");
+        const imgInput = document.getElementById("image");
+        const imgPreview = document.getElementById("img-preview");
         imgInput.addEventListener("change", function() {
             const file = this.files[0];
             if (file) {
