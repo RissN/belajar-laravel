@@ -31,7 +31,7 @@
                                     <td>{{ $student->gender == 1 ? 'Male' : 'Female' }}</td>
                                     <td>
                                         <a href="{{ route('student.edit', $student->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                        <form id="delete-form-{{ $role->id }}" method="post" class="d-inline" action="{{ route('student.destroy', $student->id) }}">
+                                        <form id="delete-form-{{ $student->id }}" method="post" class="d-inline" action="{{ route('student.destroy', $student->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm delete-btn">Delete</button>
