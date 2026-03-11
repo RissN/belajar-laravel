@@ -24,7 +24,7 @@
                             @foreach ($students as $student)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td><img src="{{ asset('storage/'. $student->name) }}"></td>
+                                    <td><img src="{{ asset('uploads/student/' . $student->image) }}" width="50"></td>
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->email }}</td>
                                     <td>{{ $student->phone }}</td>
