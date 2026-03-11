@@ -14,6 +14,29 @@
                             <label for="name" class="form-label">Name</label>
                             <input type="text" placeholder="Enter your name" class="form-control" id="name" name="name" required value="{{ old('name') }}">
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" placeholder="Enter your email" name="email" id="email" class="form-control"  required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="text" placeholder="Enter your phone" name="phone" id="phone" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <div class="position-relative">
+                                <select name="gender" id="gender" class="form-control">
+                                    <option value="">Choose Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                <i id="arrowIcon" class="bi bi-chevron-down position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); pointer-events:none;"></i>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Image</label>
+                            <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
+                        </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
                     </form>

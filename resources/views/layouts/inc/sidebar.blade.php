@@ -200,8 +200,8 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('student.index') }}">
-                    <i class="bi bi-envelope"></i>
-                    <span>Contact</span>
+                    <i class="bi bi-person-lines-fill"></i>
+                    <span>Student</span>
                 </a>
             </li><!-- End Contact Page Nav -->
 

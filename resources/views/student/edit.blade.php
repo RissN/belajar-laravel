@@ -8,21 +8,34 @@
                         <div class="alert alert-danger">{{ $errors->first() }}</div>
                     @endif
                     <h5 class="card-title">{{ $title ?? '' }}</h5>
-                    <form action="{{ route('student.update', $student->id) }}" method="post">
+                    <form action="{{ route('student.update') }}" method="post">
                         @csrf
-                        @method('PUT')
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" placeholder="Enter your name" class="form-control" id="name" name="name" value="{{ $student->name }}">
+                            <input type="text" placeholder="Enter your name" class="form-control" id="name" name="name" required value="{{ old('name') }}">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" placeholder="Enter your email" class="form-control" id="email" name="email" value="{{ $student->email }}">
+                            <label class="form-label">Email</label>
+                            <input type="email" placeholder="Enter your email" name="email" id="email" class="form-control"  required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" placeholder="Enter your password" class="form-control" id="password" name="password" value="">
-                            <small class="text-secondary">Leave blank if you don't want to change the passowrd.</small>
+                            <label class="form-label">Phone</label>
+                            <input type="text" placeholder="Enter your phone" name="phone" id="phone" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <div class="position-relative">
+                                <select name="gender" id="gender" class="form-control">
+                                    <option value="">Choose Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                <i id="arrowIcon" class="bi bi-chevron-down position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); pointer-events:none;"></i>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Image</label>
+                            <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
