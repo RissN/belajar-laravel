@@ -37,7 +37,7 @@
                     <td class="text-center">
                         <div class="form-check d-flex justify-content-center mb-0">
                             <input type="checkbox" class="form-check-input student-checkbox"
-                                name="attendance[{{ $index }}][student_id]" value="{{ $student->id }}"
+                                name="attendances[{{ $index }}][student_id]" value="{{ $student->id }}"
                                 id="student_{{ $student->id }}">
                         </div>
                     </td>
@@ -46,7 +46,7 @@
                             class="mb-0 fw-semibold cursor-pointer d-block">{{ $student->name }}</label>
                     </td>
                     <td>
-                        <select class="form-select status-in" name="attendance[{{ $index }}][status_in]"
+                        <select class="form-select status-in" name="attendances[{{ $index }}][status_in]"
                             id="" disabled>
                             <option value="">Select Status</option>
                             <option value="hadir">Hadir</option>
@@ -57,10 +57,10 @@
                     </td>
                     <td>
                         <input type="time" class="form-control check-in-time"
-                            name="attendance[{{ $index }}][check_in]"disabled>
+                            name="attendances[{{ $index }}][check_in]"disabled>
                     </td>
                     <td>
-                        <select class="form-select status-out" name="attendance[{{ $index }}][status_out]"
+                        <select class="form-select status-out" name="attendances[{{ $index }}][status_out]"
                             id="" disabled>
                             <option value="">Select Status</option>
                             <option value="pulang">Pulang</option>
@@ -70,10 +70,10 @@
                     </td>
                     <td>
                         <input type="time" class="form-control check-out-time"
-                            name="attendance[{{ $index }}][check_out]"disabled>
+                            name="attendances[{{ $index }}][check_out]"disabled>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="attendance[{{ $index }}][note]"
+                        <input type="text" class="form-control" name="attendances[{{ $index }}][note]"
                             placeholder="Optional...."disabled>
                     </td>
                 </tr>
@@ -106,17 +106,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         const checkAll = document.getElementById('check_all');
         const studentCheckboxes = document.querySelectorAll('.student-checkbox');
-        // const btnPresentAll = document.getElementById('btn-present-all');
-
-        // Event listener untuk Check All
-        if (checkAll) {
-            checkAll.addEventListener('change', function() {
-                studentCheckboxes.forEach(cb => {
-                    cb.checked = checkAll.checked;
-                    toggleRowInput(cb);
-                });
-            });
-        }
 
         function toggleRowInput(checkbox) {
             const row = checkbox.closest('tr');
@@ -134,6 +123,18 @@
             }
         }
 
+        // Event listener untuk Check All
+        if (checkAll) {
+            checkAll.addEventListener('change', function() {
+                const isChecked = this.checked;
+                studentCheckboxes.forEach(cb => {
+                    cb.checked = isChecked;
+                    toggleRowInput(cb);
+                });
+            });
+        }
+
+        // Event listener untuk setiap student checkbox
         studentCheckboxes.forEach(cb => {
             cb.addEventListener('change', function() {
                 toggleRowInput(this);
@@ -147,14 +148,5 @@
                 }
             });
         });
-        if (checkAll) {
-            checkAll.addEventListener('change', function() {
-                const isChecked = this.checked;
-                studentCheckboxes.forEach(cb =>{
-                    cb.checked = isChecked;
-                    toggleRowInput(cb);
-                })
-            })
-        }
     });
 </script>

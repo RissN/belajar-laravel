@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\Student;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AttendanceController extends Controller
 {
@@ -35,6 +35,11 @@ class AttendanceController extends Controller
     {
         $date = $request->date;
         $attendances = $request->attendances;
+
+        if (!$attendances) {
+            return redirect()->back()->with('error', 'Please select at least one student.');
+        }
+
         foreach ($attendances as $attendance) {
             $existingAttendance = Attendance::where('student_id', $attendance['student_id'])->whereDate('date', $date)->first();
             if ($existingAttendance) {
@@ -57,6 +62,8 @@ class AttendanceController extends Controller
                 ]);
             }
         }
+        Alert::success('Success', 'Student created successfully');
+        return redirect()->route('attendance.index')->with('success', 'Attendance saved successfully.');
     }
 
     /**
@@ -88,6 +95,9 @@ class AttendanceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $attendance = Attendance::find($id);
+        $attendance->delete();
+        Alert::success('Success', 'Attendance deleted successfully');
+        return redirect()->route('attendance.index');
     }
 }
