@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\Student;
 
+
 class AttendanceController extends Controller
 {
     /**
@@ -32,7 +33,30 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $date = $request->date;
+        $attendances = $request->attendances;
+        foreach ($attendances as $attendance) {
+            $existingAttendance = Attendance::where('student_id', $attendance['student_id'])->whereDate('date', $date)->first();
+            if ($existingAttendance) {
+                $existingAttendance->update([
+                    'status_in' => $attendance['status_in'],
+                    'check_in' => $attendance['check_in'],
+                    'status_out' => $attendance['status_out'],
+                    'check_out' => $attendance['check_out'],
+                    'note' => $attendance['note'],
+                ]);
+            } else {
+                Attendance::create([
+                    'student_id' => $attendance['student_id'],
+                    'date' => $date,
+                    'status_in' => $attendance['status_in'],
+                    'check_in' => $attendance['check_in'],
+                    'status_out' => $attendance['status_out'],
+                    'check_out' => $attendance['check_out'],
+                    'note' => $attendance['note'],
+                ]);
+            }
+        }
     }
 
     /**

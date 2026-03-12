@@ -106,6 +106,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const checkAll = document.getElementById('check_all');
         const studentCheckboxes = document.querySelectorAll('.student-checkbox');
+        // const btnPresentAll = document.getElementById('btn-present-all');
 
         // Event listener untuk Check All
         if (checkAll) {
