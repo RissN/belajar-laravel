@@ -11,7 +11,7 @@
 
 <div class="alert alert-info border-0 shadow-sm mb-4 mt-4">
     <strong>Note:</strong>
-    <p>If you want to mark all employees present, click</p>
+    <p>Please check the status of each student before saving the attendance.</p>
 </div>
 
 <div class="table-responsive shadow-sm mb-4">
@@ -20,7 +20,7 @@
             <tr>
                 <th width="5%" class="">
                     <div class="form-check d-flex justify-content-center mb-0">
-                        <input type="checkbox" class="form-check-input" id="check-all" title="Check All">
+                        <input type="checkbox" class="form-check-input" id="check_all" title="Check All">
                     </div>
                 </th>
                 <th width="20%">Student Name</th>
@@ -46,7 +46,8 @@
                             class="mb-0 fw-semibold cursor-pointer d-block">{{ $student->name }}</label>
                     </td>
                     <td>
-                        <select class="form-select status-in" name="attendance[{{ $index }}][status_in]" id="" disabled>
+                        <select class="form-select status-in" name="attendance[{{ $index }}][status_in]"
+                            id="" disabled>
                             <option value="">Select Status</option>
                             <option value="hadir">Hadir</option>
                             <option value="sakit">Sakit</option>
@@ -59,7 +60,8 @@
                             name="attendance[{{ $index }}][check_in]"disabled>
                     </td>
                     <td>
-                        <select class="form-select status-out" name="attendance[{{ $index }}][status_out]" id="" disabled>
+                        <select class="form-select status-out" name="attendance[{{ $index }}][status_out]"
+                            id="" disabled>
                             <option value="">Select Status</option>
                             <option value="pulang">Pulang</option>
                             <option value="bolos">Bolos</option>
@@ -71,7 +73,8 @@
                             name="attendance[{{ $index }}][check_out]"disabled>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="attendance[{{ $index }}][note]" placeholder="Optional...."disabled>
+                        <input type="text" class="form-control" name="attendance[{{ $index }}][note]"
+                            placeholder="Optional...."disabled>
                     </td>
                 </tr>
             @empty
@@ -103,11 +106,20 @@
     document.addEventListener('DOMContentLoaded', function() {
         const checkAll = document.getElementById('check_all');
         const studentCheckboxes = document.querySelectorAll('.student-checkbox');
-        const btnPresentAll = document.querySelectorAll('btn-present-all');
+
+        // Event listener untuk Check All
+        if (checkAll) {
+            checkAll.addEventListener('change', function() {
+                studentCheckboxes.forEach(cb => {
+                    cb.checked = checkAll.checked;
+                    toggleRowInput(cb);
+                });
+            });
+        }
 
         function toggleRowInput(checkbox) {
             const row = checkbox.closest('tr');
-            const input = row.querySelectorAll('select, input::not([type = "checkbox"])');
+            const input = row.querySelectorAll('select, input:not([type="checkbox"])');
             if (checkbox.checked) {
                 row.classList.add('selected');
                 input.forEach(element => {
@@ -120,8 +132,8 @@
                 });
             }
         }
+
         studentCheckboxes.forEach(cb => {
-            toggleRowInput(cb);
             cb.addEventListener('change', function() {
                 toggleRowInput(this);
                 if (checkAll) {
@@ -132,7 +144,16 @@
                     checkAll.indeterminate = checkCount > 0 && checkCount < studentCheckboxes
                         .length;
                 }
+            });
+        });
+        if (checkAll) {
+            checkAll.addEventListener('change', function() {
+                const isChecked = this.checked;
+                studentCheckboxes.forEach(cb =>{
+                    cb.checked = isChecked;
+                    toggleRowInput(cb);
+                })
             })
-        })
-    })
+        }
+    });
 </script>
