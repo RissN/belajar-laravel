@@ -15,7 +15,7 @@ class AttendanceController extends Controller
     {
         $attendances = Attendance::with('student')->latest()->get();
         $title = "Data Attendance";
-        return view('attendances.index', compact('attendances', 'title'));
+        return view('attendance.index', compact('attendances', 'title'));
     }
 
     /**
@@ -24,7 +24,7 @@ class AttendanceController extends Controller
     public function create()
     {
         $students = Student::get();
-        return view('attendances.create', compact('students'));
+        return view('attendance.create', compact('students'));
     }
 
     /**
