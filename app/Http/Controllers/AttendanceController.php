@@ -79,7 +79,9 @@ class AttendanceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $attendance = Attendance::with('student')->findOrFail($id);
+        $title = "Edit Attendance";
+        return view('attendance.edit', compact('attendance', 'title'));
     }
 
     /**
@@ -87,7 +89,22 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'date' => 'required|date',
+            'status_in' => 'nullable|string',
+            'status_out' => 'nullable|string',
+        ]);
+        $attendance = Attendance::findOrFail($id);
+        $attendance->update([
+            'date' => $request->date,
+            'status_in' => $request->status_in,
+            'check_in' => $request->check_in,
+            'status_out' => $request->status_out,
+            'check_out' => $request->check_out,
+            'note' => $request->note
+        ]);
+        Alert::success('Success', 'Attendance updated successfully');
+        return redirect()->route('attendance.index');
     }
 
     /**
