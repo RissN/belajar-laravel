@@ -102,7 +102,9 @@
                                             <button class="btn btn-primary w-100" type="submit">Login</button>
                                         </div>
                                     </form>
-
+                                    <div class="mt-2">
+                                        <a href="{{ route('google-auth') }}" class="btn btn-danger w-100">Login with Google</a>
+                                    </div>
                                 </div>
                             </div>
 

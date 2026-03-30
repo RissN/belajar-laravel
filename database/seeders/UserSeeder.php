@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => 'admin123',
-            'role_id' => 4,
+            'role_id' => 1,
         ]);
     }
 }

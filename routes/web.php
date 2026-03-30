@@ -73,6 +73,9 @@ Route::resource('role', RoleController::class);
 Route::resource('student', StudentController::class);
 Route::resource('attendance', AttendanceController::class);
 
+route::get('auth/google', [LoginController::class, 'redirect'])->name('google-auth');
+route::get('auth/google/callback-url', [LoginController::class, 'callbackGoogle']);
+
 Route::get('dashboard', [DashboardController::class, 'index']);
 
 // CREATE READ UPDATE DELETE (CRUD)
